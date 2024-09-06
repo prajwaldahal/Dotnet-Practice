@@ -1,0 +1,47 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+class program
+{
+    public static void Main()
+    {
+        SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
+        sb.DataSource = @"(localdb)\MSSQLLocalDB";;
+        sb.InitialCatalog="dotnet";
+        sb.IntegratedSecurity = true;
+
+        using (SqlConnection con = new SqlConnection(sb.ConnectionString))
+        {
+            con.Open();
+            string createDB = @"create table customer(id int primary key,name varchar(20))";
+            SqlCommand cmd = new SqlCommand(createDB, con);
+			string 
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        /* Console.WriteLine("Getting Connection...");
+		 var datasource = @"(localdb)\MSSQLLocalDB"; //server
+		 var database = "Students"; //database name
+		 var username = "sa"; //username
+		 var password = "password"; //password
+		 string connString = @"Datasource=" + datasource + ";initial catalog=" + database + ";persist security info=true;user id=" + username + ";Password=" + password;
+
+		 SqlConnection conn = new SqlConnection(connString);
+		 try
+		 {
+			 Console.WriteLine("opening connection");
+			 //open connection
+			 conn.open();
+			 Console.WriteLine("connection successful");
+		 }catch(Exception e){
+		 Console.WriteLine("Error"+ e);
+		 }*/
+    }
+}
